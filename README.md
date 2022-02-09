@@ -8,18 +8,20 @@ from [Bearing data center datasets](https://engineering.case.edu/bearingdatacent
 represents 12KHz sampled vibration accelerometer output for different EDM-damaged fault diameter (0.007, 0.014, 0.021
 in) in a different places (ball, inner race, outer race) and different load factor on the rotor.
 
-Each signal have been processed to the time-frequency diagram with subsequent normalization to [0,1]
+Each signal have been processed to the time-frequency diagram with subsequent normalization to [0,1].
+
 According to Kotelnikov-Nyquist-Shannon theorem the spectral width of such signal can be up to 6KHz.
+
 High-resolution time-frequency diagrams are above:
 ![](doc/normal-6k.png?raw=true "Title")
 
 ![](doc/ir7-6k.png?raw=true "Title")
 
-Applying narrow segment width for STFT (256 samples) with the subsequent image downsampling to 64 pixels 
+Applying narrow segment width for STFT (256 samples) with the subsequent image down-sampling to 64 pixels 
 we will have about 0.1 KHz per pixel line. Since the distance between major spectral peaks is greater than 0.1KHz such
-downsampling seems to be coorect for the analysis of resulting diagrams.
+down-sampling seems to be correct for the analysis of resulting diagrams.
 
-Raw output after 256-sample STFT (before downsampling):
+Raw output after 256-sample STFT (before down-sampling):
 
 ![](doc/Normal.png?raw=true "Title")
 
