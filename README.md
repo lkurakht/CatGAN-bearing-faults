@@ -9,8 +9,20 @@ represents 12KHz sampled vibration accelerometer output for different EDM-damage
 in) in a different places (ball, inner race, outer race) and different load factor on the rotor.
 
 Each signal have been processed to the time-frequency diagram with subsequent normalization to [0,1]
+According to Kotelnikov-Nyquist-Shannon theorem the spectral width of such signal can be up to 6KHz.
+High-resolution time-frequency diagrams are above:
+![](doc/normal-6k.png?raw=true "Title")
+
+![](doc/ir7-6k.png?raw=true "Title")
+
+Applying narrow segment width for STFT (256 samples) with the subsequent image downsampling to 64 pixels 
+we will have about 0.1 KHz per pixel line. Since the distance between major spectral peaks is greater than 0.1KHz such
+downsampling seems to be coorect for the analysis of resulting diagrams.
+
+Raw output after 256-sample STFT (before downsampling):
 
 ![](doc/Normal.png?raw=true "Title")
+
 ![](doc/IR7.png?raw=true "Title")
 
 Since we have only one signal for normal data and for each type of faults, we need to cut them into short
