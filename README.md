@@ -23,9 +23,9 @@ down-sampling seems to be correct for the analysis of resulting diagrams.
 
 Raw output after 256-sample STFT (before down-sampling):
 
-![](doc/Normal.png?raw=true "Title")
+![](doc/normal-129.png?raw=true "Title")
 
-![](doc/IR7.png?raw=true "Title")
+![](doc/ir7-129.png?raw=true "Title")
 
 Since we have only one signal for normal data and for each type of faults, we need to cut them into short
 overlapping segments to form the train dataset. I'll take 1024 samples per segments with 128samples as a step, so I got
