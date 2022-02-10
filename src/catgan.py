@@ -41,3 +41,47 @@ class Classifier(nn.Module):
         #        print('after classifying: ', x.shape)
 
         return x
+
+
+class Generator(nn.Module):
+    def __init__(self):
+        """
+        Initialize generator
+        """
+        super().__init__()
+
+        self.l1 = nn.Sequential(
+            nn.ConvTranspose2d(200, 200, kernel_size = 3, stride = 2),
+            nn.ReLU(),
+            nn.BatchNorm2d(200)
+        )
+
+        self.l2 = nn.Sequential(
+            nn.ConvTranspose2d(200, 64, kernel_size = 3, stride = 2),
+            nn.ReLU(),
+            nn.BatchNorm2d(64)
+        )
+
+        self.l3 = nn.Sequential(
+            nn.ConvTranspose2d(64, 32, kernel_size = 3, stride = 2),
+            nn.ReLU(),
+            nn.BatchNorm2d(32)
+        )
+
+        self.l4 = nn.Sequential(
+            nn.ConvTranspose2d(32, 16, kernel_size = 3, stride = 2),
+            nn.Tanh()
+        )
+
+        self.l5 = nn.Sequential(
+            nn.ConvTranspose2d(16, 1, kernel_size = 4, stride = 2),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        x = self.l1(x)
+        x = self.l2(x)
+        x = self.l3(x)
+        x = self.l4(x)
+        x = self.l5(x)
+        return x
