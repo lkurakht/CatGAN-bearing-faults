@@ -1,8 +1,13 @@
 import torch
 from torch import nn
 
+
 class Classifier(nn.Module):
-    def __init__(self, cat_num=4):
+    def __init__(self, cat_num = 4):
+        """
+        Initialize classifier
+        :param cat_num: Number of classes to classify
+        """
         super().__init__()
         self.cat_num = cat_num
         self.conv1 = nn.Conv2d(1, 32, kernel_size=5, stride=4, padding=2)
