@@ -15,6 +15,15 @@ def Normalize(arr: np.array) -> np.array:
     """
     return (arr - np.min(arr)) / (np.max(arr) - np.min(arr))
 
+def Normalize(arr: torch.Tensor) -> torch.Tensor:
+    """
+    Min-max normalization of tensor to [0,1]
+    :param arr: array to normalize
+    :return:
+    """
+    arr -= arr.min()
+    arr /= arr.max()
+    return arr
 
 def ScaleToSquare(arr: np.ndarray, size: int) -> np.ndarray:
     """
@@ -85,13 +94,23 @@ class BearingDataset(torch.utils.data.Dataset):
             raise RuntimeError('labels and filenames number doesnt matchs')
 
         self.img_labels = []
+
+        ### "amount of samples per class is expected to be the same for all k categories", cropping to the minimum length
+        minimum_length = 1e10
+        for idx, filename in enumerate(self.filenames):
+            signal = loadmat(filename)
+            drive_end_key = [k for k in signal.keys() if 'DE_time' in k]
+            if not len(drive_end_key):
+                continue
+            minimum_length = min(minimum_length, len(signal[drive_end_key[0]].ravel()))
+
         for idx, filename in enumerate(self.filenames):
             signal = loadmat(filename)
             drive_end_key = [k for k in signal.keys() if 'DE_time' in k]
             if not len(drive_end_key):
                 continue
             de_signal = signal[drive_end_key[0]].ravel()
-            for i in range(0, (len(de_signal) - self.segment_size), self.step):
+            for i in range(0, (minimum_length - self.segment_size), self.step):
                 pack_data = de_signal[i: i + self.segment_size]
                 freq, time, zmag = stft(pack_data, fs, window = 'hann', nperseg = self.Nw, noverlap = self.No)
                 scaled_zmag = ScaleToSquare(np.abs(zmag), self.img_size)

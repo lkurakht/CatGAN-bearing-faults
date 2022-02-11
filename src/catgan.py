@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-
+from bearing_dataset import Normalize
 
 class Classifier(nn.Module):
     def __init__(self, cat_num = 4):
@@ -84,4 +84,6 @@ class Generator(nn.Module):
         x = self.l3(x)
         x = self.l4(x)
         x = self.l5(x)
+        # for idx in range(x.shape[0]):
+        #     x[idx] = Normalize(x[idx])
         return x
