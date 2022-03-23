@@ -42,6 +42,20 @@ class Classifier(nn.Module):
 
         return x
 
+    def get_latent_features(self, x):
+        #        print('input: ', x.shape)
+        x = self.dropout(self.norm1(self.act(self.conv1(x))))
+        #        print('after first layer: ', x.shape)
+
+        x = self.dropout(self.norm2(self.act(self.conv2(x))))
+        #        print('after second layer: ', x.shape)
+
+        x = self.dropout(self.norm3(self.act(self.conv3(x))))
+        #        print('after third layer: ', x.shape)
+
+        x = x.view(x.shape[0], -1)
+        #        print('after flattening: ', x.shape)
+        return x
 
 class Generator(nn.Module):
     def __init__(self):
