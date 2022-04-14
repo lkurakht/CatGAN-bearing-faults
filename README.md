@@ -40,5 +40,7 @@ Resulting latent manifold is above.
 
 ![](doc/unsupervised.png?raw=true "Unsupervised latent manifold")
 
+
 For comparison, the result of supervised latent manifold:
+
 ![](doc/supervised.png?raw=true "Supervised latent manifold")
