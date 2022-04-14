@@ -34,3 +34,11 @@ about 1000 segment diagrams for each of 9 fault types and about 2000 diagrams fo
 ![](doc/training_set_example.png?raw=true "Title")
 
 The segment step and applied window function properties seems to be appropriate because generated images look different and all spectral characteristics are preserved
+
+For unsupervised classifying damage type was trained categorical generative adversarial network.
+Resulting latent manifold is above.
+
+![](doc/unsupervised.png?raw=true "Unsupervised latent manifold")
+
+For comparison, the result of supervised latent manifold:
+![](doc/supervised.png?raw=true "Supervised latent manifold")
